@@ -1,0 +1,5 @@
+package sodukoSolver;
+
+public interface InterfaceSodukoSolver {
+
+}

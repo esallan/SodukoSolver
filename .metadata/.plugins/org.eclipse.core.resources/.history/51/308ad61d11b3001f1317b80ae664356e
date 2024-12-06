@@ -1,0 +1,141 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import sodukoSolver.InterfaceSudokuSolver;
+
+class testSodukoSolver {
+
+	// Tests for solve(); method
+	@Test
+	@DisplayName("solve an empty soduko, should be able and return true")
+	void solveEmptySoduko() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@DisplayName("solve given soduko, should return true")
+	void solveGivenSoduko() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@DisplayName("not possible to solve, should return false")
+	void solveTryNotPossible() {
+		fail("Not yet implemented");
+	}
+
+	// Tests for set(); method
+	@Test
+	@DisplayName("check if digit is in correct box")
+	void setCheckCorrectDigit() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@DisplayName("throws IndexOutOfBoundsException if row or col is outside the range[0..8]")
+	void setCheckIndexOutOfBoundsException() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@DisplayName("IllegalArgumentException if digit is outside the range [0..9]")
+	void setCheckIllegalArgumentException() {
+		fail("Not yet implemented");
+	}
+
+	// Tests for get(); method
+	@Test
+	@DisplayName("IndexOutOfBoundsException if row or col is outside the range[0..8]")
+	void getCheckIndexOutOfBoundsException() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	@DisplayName("gets the digit in box row")
+	void getCheckDigitInBox() {
+		fail("Not yet implemented");
+
+	}
+	@Test
+	@DisplayName("gets 0 if the box i empty")
+	void getCheckThatDigitIsZeroIfBoxISEmpty() {
+		fail("Not yet implemented");
+
+	}
+
+	
+	//Tests for clear(); method
+	@Test
+	@DisplayName("IndexOutOfBoundsException if row or col is outside the range[0..8]")
+	void clearCheckIndexOutOfBoundsException(){
+		fail("Not yet implemented");
+		}
+	
+	
+	@Test
+	@DisplayName("Test that box, row, col, is empty, 0, after cleared")
+	void clearCheck() {
+		fail("Not yet");
+}
+	
+	
+	//Test for clearAll(); method
+	@Test
+	@DisplayName("Test that every box in grid is empty, 0, after clearAll")
+	void clearAllCheck() {
+		fail("Not yet");
+}
+
+	
+	//Tests for isValid(); method
+	
+	@Test
+	@DisplayName("IndexOutOfBoundsException if row or col is outside the range [0..8]")
+	void isValidOutsideRange() {
+		fail("Not yet");
+}
+	
+	@Test
+	@DisplayName("true if the box is empty or if the digit in the box row, col follows")
+	void isValidEmptyBox() {
+		fail("Not yet");
+}
+	@Test
+	@DisplayName("true if the digit in the box row, col follows the sudoku rules")
+	void isValidSodukoRules() {
+		fail("Not yet");
+}
+	
+	
+
+	@Override
+	public boolean isValid(int row, int col) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAllValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setGrid(int[][] m) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int[][] getGrid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
+
+

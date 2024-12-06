@@ -1,0 +1,26 @@
+package sodukoSolver;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class SodukoGUI {
+	
+	public void createWindow() {
+        JFrame frame = new JFrame("SodukoSolver");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Skapa en panel för innehållet
+        JPanel sodukoWindow = new JPanel();
+        sodukoWindow.setPreferredSize(new Dimension(600, 600)); // Rimligare storlek
+
+        // Lägg till panelen i fönstret
+        frame.add(sodukoWindow, BorderLayout.CENTER);
+
+        // Packa och visa fönstret
+        frame.pack();
+        frame.setVisible(true);
+    }
+}

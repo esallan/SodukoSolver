@@ -1,0 +1,60 @@
+package sodukoSolver;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class SodukoGUI {
+
+	private JFrame frame;
+	private JTextField[][] grid = new JTextField[9][9];
+
+	public void createWindow() {
+		frame = new JFrame("SodukoSolver");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel sodukoWindow = new JPanel(new BorderLayout());
+		sodukoWindow.setPreferredSize(new Dimension(600, 600));
+
+		frame.add(sodukoWindow, BorderLayout.CENTER);
+		addButtons();
+		sodukoWindow.add(createGrid());
+
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+	private JPanel createGrid() {
+		JPanel gridPanel = new JPanel(new GridLayout(9, 9));
+		for (int row = 0; row < 9; row++) {
+			for (int col = 0; col < 9; col++) {
+				JTextField field = new JTextField();
+				field.setHorizontalAlignment(JTextField.CENTER); 
+				grid[row][col] = field; 
+				gridPanel.add(field); 
+			}
+		}
+
+		return gridPanel;
+	}
+
+	private void addButtons() {
+		JButton solveButton = new JButton("Solve");
+		JButton clearButton = new JButton("Clear");
+
+		solveButton.addActionListener(null);
+		clearButton.addActionListener(null);
+
+		JPanel commandPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		commandPanel.add(solveButton);
+		commandPanel.add(clearButton);
+
+		frame.add(commandPanel, BorderLayout.SOUTH);
+	}
+}
