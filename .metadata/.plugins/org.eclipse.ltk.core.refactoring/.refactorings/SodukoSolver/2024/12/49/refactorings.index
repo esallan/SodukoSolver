@@ -6,3 +6,5 @@
 1733393830423	Delete element
 1733398255079	Rename field 'frame'
 1733427470093	Rename type 'SodukoSolver'
+1733481487944	Rename type 'SodukoSolverMain'
+1733481515680	Rename type 'SodukoGUI'

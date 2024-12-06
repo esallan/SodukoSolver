@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -92,7 +91,7 @@ class testSodukoSolver {
 	@DisplayName("IndexOutOfBoundsException if row or col is outside the range[0..8]")
 	void getCheckIndexOutOfBoundsException() {
 		SudokuSolver solver = new SudokuSolver();
-		assertThrows(IndexOutOfBoundsException.class, () -> {
+		assertThrowsExactly(IndexOutOfBoundsException.class, () -> {
 			solver.get(9, 9);
 		});
 		
@@ -120,17 +119,13 @@ class testSodukoSolver {
 	@DisplayName("IndexOutOfBoundsException if row or col is outside the range[0..8]")
 	void clearCheckIndexOutOfBoundsException() {
 		SudokuSolver solver = new SudokuSolver();
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			solver.clear(9, 9);
-		});
+		
 	}
 
 	@Test
 	@DisplayName("Test that box, row, col, is empty, 0, after cleared")
 	void clearCheck() {
-		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 0, 1);
-		assert(0, solver.clear(0, 0)); // gör först clear, sen jämför med get!
+		fail("Not yet");
 	}
 
 //Test for clearAll(); method

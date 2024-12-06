@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -91,27 +90,20 @@ class testSodukoSolver {
 	@Test
 	@DisplayName("IndexOutOfBoundsException if row or col is outside the range[0..8]")
 	void getCheckIndexOutOfBoundsException() {
-		SudokuSolver solver = new SudokuSolver();
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			solver.get(9, 9);
-		});
-		
+		fail("Not yet implemented");
 	}
 
 	@Test
 	@DisplayName("gets the digit in box row")
 	void getCheckDigitInBox() {
-		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 0, 1);
-		assertEquals(1, solver.get(0, 0));
+		fail("Not yet implemented");
 
 	}
 
 	@Test
 	@DisplayName("gets 0 if the box i empty")
 	void getCheckThatDigitIsZeroIfBoxISEmpty() {
-		SudokuSolver solver = new SudokuSolver();
-		assertEquals(0, solver.get(0, 0));
+		fail("Not yet implemented");
 
 	}
 
@@ -119,18 +111,13 @@ class testSodukoSolver {
 	@Test
 	@DisplayName("IndexOutOfBoundsException if row or col is outside the range[0..8]")
 	void clearCheckIndexOutOfBoundsException() {
-		SudokuSolver solver = new SudokuSolver();
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			solver.clear(9, 9);
-		});
+		fail("Not yet implemented");
 	}
 
 	@Test
 	@DisplayName("Test that box, row, col, is empty, 0, after cleared")
 	void clearCheck() {
-		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 0, 1);
-		assert(0, solver.clear(0, 0)); // gör först clear, sen jämför med get!
+		fail("Not yet");
 	}
 
 //Test for clearAll(); method

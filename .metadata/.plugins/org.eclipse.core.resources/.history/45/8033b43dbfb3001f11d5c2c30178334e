@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -128,9 +127,7 @@ class testSodukoSolver {
 	@Test
 	@DisplayName("Test that box, row, col, is empty, 0, after cleared")
 	void clearCheck() {
-		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 0, 1);
-		assert(0, solver.clear(0, 0)); // gör först clear, sen jämför med get!
+		fail("Not yet");
 	}
 
 //Test for clearAll(); method

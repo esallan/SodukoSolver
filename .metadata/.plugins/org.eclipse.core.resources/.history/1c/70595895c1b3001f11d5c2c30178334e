@@ -130,7 +130,7 @@ class testSodukoSolver {
 	void clearCheck() {
 		SudokuSolver solver = new SudokuSolver();
 		solver.set(0, 0, 1);
-		assert(0, solver.clear(0, 0)); // gör först clear, sen jämför med get!
+		assertEquals(0, solver.clear(0, 0));
 	}
 
 //Test for clearAll(); method
