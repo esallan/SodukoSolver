@@ -19,16 +19,18 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public void set(int row, int col, int digit) {
-		if(row > 8 || row < 0) {
+		if (row > 8 || row < 0) {
 			throw new IndexOutOfBoundsException();
 		}
-		if(col > 8 || col < 0) {
+		if (col > 8 || col < 0) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-		if(digit > 8 ||digit < 0) {
-			throw new IndexOutOfBoundsException();
+
+		if (digit > 8 || digit < 0) {
+			throw new IllegalArgumentException();
 		}
+
+		matrix[row][col] = digit;
 
 	}
 
@@ -45,9 +47,9 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public void clearAll() {
-		for(int row = 0; row < matrix.length; row++) {
-			for(int col = 0; col < matrix.length; col++) {
-				matrix[row][col]=0;
+		for (int row = 0; row < matrix.length; row++) {
+			for (int col = 0; col < matrix.length; col++) {
+				matrix[row][col] = 0;
 			}
 		}
 
@@ -55,36 +57,46 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public boolean isValid(int row, int col) {
-		if(row > 8 || row < 0) {
+		if (row > 8 || row < 0) {
 			throw new IndexOutOfBoundsException();
 		}
-		if(col > 8 || col < 0) {
+		if (col > 8 || col < 0) {
 			throw new IndexOutOfBoundsException();
-		}
-		else return true;
+		} else
+			return true;
 	}
 
 	@Override
 	public boolean isAllValid() {
-		for(int row = 0; row < matrix.length; row++) {
-			for(int col = 0; col < matrix.length; col++) {
-				if(get(row, col) < 0 || get(row,col) > 8){
+
+		for (int row = 0; row < matrix.length; row++) {
+			for (int col = 0; col < matrix.length; col++) {
+				if (get(row, col) < 1 || get(row, col) > 9) {
 					return false;
 				}
 			}
-		}return true;
+		}
+		return true;
 	}
 
 	@Override
 	public void setGrid(int[][] m) {
-		// TODO Auto-generated method stub
-
+		if (m.length != 9 || m[0].length != 9) {
+			throw new IllegalArgumentException("Grid must be 9x9");
+		}
+		
+		for(int row = 0; row < 9; row++) {
+			for( int col = 1; col < 9; col ++) {
+				if(m[row][col] < 0 || m[row][col] > 9 ) {
+					throw new IllegalArgumentException("Value must be between 0 and 9");
+				}
+			}
+		} this.matrix = m;
 	}
 
 	@Override
 	public int[][] getGrid() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.matrix;
 	}
 
 }

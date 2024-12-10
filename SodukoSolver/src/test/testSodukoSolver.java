@@ -85,7 +85,7 @@ class testSodukoSolver {
 	void setCheckIllegalArgumentException() {
 		SudokuSolver solver = new SudokuSolver();
 		assertThrows(IllegalArgumentException.class, () -> {
-			solver.set(0, 0, 0);
+			solver.set(0, 0, 10);
 		});
 	}
 
@@ -170,7 +170,6 @@ class testSodukoSolver {
 		
 	}
 	
-	
 
 	@Test
 	@DisplayName("true if the digit in the box row, col follows the sudoku rules")
@@ -184,27 +183,61 @@ class testSodukoSolver {
 	@Test
 	@DisplayName("true if all filled in digits follows the the sudoku rules")
 	void isAllValidSodukoRules() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		solver.set(0, 0, 1);
+		solver.set(0, 1, 1);
+		solver.set(2, 0, 1);
+		solver.set(0, 3, 1);
+		assertTrue(solver.isAllValid(), "true if all filled in digits follow rules");		
 	}
 
 	@Test
 	@DisplayName("false if all filled in digits does NOT follows the the sudoku rules")
 	void isAllValidSodukoRulesNotFollowed() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		solver.set(0, 0, 10);
+		solver.set(0, 1, 1);
+		solver.set(2, 0, 0);
+		solver.set(0, 3, 1);
+		assertFalse(solver.isAllValid(), "false if all filled in digits does not follow rules");		
+	
 	}
 
 //Tests for setGrid();
 	@Test
 	@DisplayName("IllegalArgumentException if m has the wrong dimension")
 	void setGridWrongDimensions() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		int[][] invalidGrid = {
+				{5,3,4,1,0},
+				{0,1,2,3,4}
+		};
+		
+		assertThrows(IllegalArgumentException.class, () -> solver.setGrid(invalidGrid), 
+				"Should throw IllegalArgumentException for non-9x9 grid"); 
+		
 
 	}
 
 	@Test
 	@DisplayName("IllegalArgumentException if m contains values outside the range [0..9]")
 	public void setGridValuesOutsideRange() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		int[][] invalidDigitsGrid = {
+				{10, 12, 0, 0, 7, 0, 0, 0, 0},
+		        {6, 0, 0, 1, 9, 5, 0, 0, 0},
+		        {0, 9, 8, 0, 0, 0, 0, 6, 0},
+		        {8, 0, 0, 0, 6, 0, 0, 0, 3},
+		        {4, 0, 0, 8, 0, 3, 0, 0, 1},
+		        {7, 0, 0, 0, 2, 0, 0, 0, 6},
+		        {0, 6, 0, 0, 0, 0, 2, 8, 0},
+		        {0, 0, 0, 4, 1, 9, 0, 0, 5},
+		        {0, 0, 0, 0, 8, 0, 0, 7, 9}
+		};
+		
+		assertThrows(IllegalArgumentException.class, () -> solver.setGrid(invalidDigitsGrid), 
+				"Should throw IllegalArgumentException if grid contains values outside 0-9"); 
+		
 
 	}
 
@@ -212,8 +245,24 @@ class testSodukoSolver {
 	@Test
 	@DisplayName("a matix with all digits in the sudoku grid gets returned")
 	public void getGrid() {
-		fail("Not yet");
-
+		SudokuSolver solver = new SudokuSolver();
+		int[][] grid = {
+				{2, 1, 0, 0, 7, 0, 0, 0, 0},
+		        {6, 0, 0, 1, 9, 5, 0, 0, 0},
+		        {0, 9, 8, 0, 0, 0, 0, 6, 0},
+		        {8, 0, 0, 0, 6, 0, 0, 0, 3},
+		        {4, 0, 0, 8, 0, 3, 0, 0, 1},
+		        {7, 0, 0, 0, 2, 0, 0, 0, 6},
+		        {0, 6, 0, 0, 0, 0, 2, 8, 0},
+		        {0, 0, 0, 4, 1, 9, 0, 0, 5},
+		        {0, 0, 0, 0, 8, 0, 0, 7, 9}
+		};
+		
+		solver.setGrid(grid);
+		int[][] copyOfGrid = solver.getGrid();
+		for(int row = 0; row<9; row++) {
+			assertArrayEquals(grid[row], copyOfGrid[row], "rows shoud match");
+		}
 	}
 
 }
