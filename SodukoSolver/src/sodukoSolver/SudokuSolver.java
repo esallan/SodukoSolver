@@ -19,38 +19,60 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public void set(int row, int col, int digit) {
-		// TODO Auto-generated method stub
+		if(row > 8 || row < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		if(col > 8 || col < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		if(digit > 8 ||digit < 0) {
+			throw new IndexOutOfBoundsException();
+		}
 
 	}
 
 	@Override
 	public int get(int row, int col) {
-		// TODO Auto-generated method stub
-		return 0;
+		return matrix[row][col];
 	}
 
 	@Override
 	public void clear(int row, int col) {
-		// TODO Auto-generated method stub
+		matrix[row][col] = 0;
 
 	}
 
 	@Override
 	public void clearAll() {
-		// TODO Auto-generated method stub
+		for(int row = 0; row < matrix.length; row++) {
+			for(int col = 0; col < matrix.length; col++) {
+				matrix[row][col]=0;
+			}
+		}
 
 	}
 
 	@Override
 	public boolean isValid(int row, int col) {
-		// TODO Auto-generated method stub
-		return false;
+		if(row > 8 || row < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		if(col > 8 || col < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		else return true;
 	}
 
 	@Override
 	public boolean isAllValid() {
-		// TODO Auto-generated method stub
-		return false;
+		for(int row = 0; row < matrix.length; row++) {
+			for(int col = 0; col < matrix.length; col++) {
+				if(get(row, col) < 0 || get(row,col) > 8){
+					return false;
+				}
+			}
+		}return true;
 	}
 
 	@Override

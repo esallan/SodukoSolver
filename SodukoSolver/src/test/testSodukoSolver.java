@@ -11,6 +11,8 @@ import sodukoSolver.SudokuSolver;
 
 class testSodukoSolver {
 
+	
+	
 // Tests for solve(); method
 	@Test
 	@DisplayName("solve an empty soduko, should be able and return true")
@@ -130,33 +132,52 @@ class testSodukoSolver {
 	void clearCheck() {
 		SudokuSolver solver = new SudokuSolver();
 		solver.set(0, 0, 1);
-		assert(0, solver.clear(0, 0)); // gör först clear, sen jämför med get!
+		solver.clear(0, 0);
+		assertEquals(0, solver.get(0, 0));
+ 
 	}
 
 //Test for clearAll(); method
 	@Test
 	@DisplayName("Test that every box in grid is empty, 0, after clearAll")
 	void clearAllCheck() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		solver.set(0, 0, 1);
+		solver.set(1, 0, 2);
+		solver.set(0, 2, 3);
+		solver.clearAll();
+		assertEquals(0, solver.get(0, 0));
+		assertEquals(0, solver.get(1, 0));
+		assertEquals(0, solver.get(0, 2));
+		
 	}
 
 //Tests for isValid(); method
 	@Test
 	@DisplayName("IndexOutOfBoundsException if row or col is outside the range [0..8]")
 	void isValidOutsideRange() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			solver.isValid(9,9);
+		});
 	}
 
 	@Test
-	@DisplayName("true if the box is empty or if the digit in the box row, col follows")
+	@DisplayName("true if the box is empty")
 	void isValidEmptyBox() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		assertTrue(solver.isValid(0, 0), "true if the box is empty");
+		
 	}
+	
+	
 
 	@Test
 	@DisplayName("true if the digit in the box row, col follows the sudoku rules")
 	void isValidSodukoRules() {
-		fail("Not yet");
+		SudokuSolver solver = new SudokuSolver();
+		solver.set(0, 0, 1);
+		assertTrue(solver.isValid(0, 0), "true if the digit is valid");
 	}
 
 //Tests for isAllValid(); method
