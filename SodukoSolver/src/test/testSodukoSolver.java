@@ -184,10 +184,8 @@ class testSodukoSolver {
 	@DisplayName("true if all filled in digits follows the the sudoku rules")
 	void isAllValidSodukoRules() {
 		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 0, 1);
-		solver.set(0, 1, 1);
+		solver.set(0, 0, 8);
 		solver.set(2, 0, 1);
-		solver.set(0, 3, 1);
 		assertTrue(solver.isAllValid(), "true if all filled in digits follow rules");		
 	}
 
@@ -195,8 +193,8 @@ class testSodukoSolver {
 	@DisplayName("false if all filled in digits does NOT follows the the sudoku rules")
 	void isAllValidSodukoRulesNotFollowed() {
 		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 0, 10);
-		solver.set(0, 1, 1);
+		solver.set(0, 0, 9);
+		solver.set(0, 1, 9);
 		solver.set(2, 0, 0);
 		solver.set(0, 3, 1);
 		assertFalse(solver.isAllValid(), "false if all filled in digits does not follow rules");		

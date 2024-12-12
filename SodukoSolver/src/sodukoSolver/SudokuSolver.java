@@ -13,8 +13,52 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public boolean solve() {
-		// TODO Auto-generated method stub
-		return false;
+		return solve(0, 0);
+	}
+
+	private boolean solve(int row, int col) {
+		int[] nextElementIndecies = next(row, col);
+		int nextRow = nextElementIndecies[0];
+		int nextCol = nextElementIndecies[1];
+		if (nextRow == 0 && nextCol == 0) {
+			return true;
+		}
+		boolean isPreFilled = matrix[row][col] != 0;
+		if (isPreFilled) {
+			boolean valid = isValid(row, col);
+			if (!valid) {
+				return false;
+			} else {
+				return solve(nextRow, nextCol);
+			}
+		} else {
+			for (int attemptedNumber = 1; attemptedNumber < 10; attemptedNumber++) {
+				matrix[row][col] = attemptedNumber;
+				boolean valid = isValid(row, col);
+				if (valid) {
+					boolean solvable = solve(nextRow, nextCol);
+					if (!solvable) {
+						continue;
+					} else {
+						return true;
+					}
+				} else {
+					continue;
+				}
+			}
+			return false;
+		}
+
+	}
+
+	private int[] next(int row, int col) {
+		if (row == 8 && col == 8) {
+			return new int[] { 0, 0 };
+		} else if (col == 8) {
+			return new int[] { row + 1, 0 };
+		} else {
+			return new int[] { row, col + 1 };
+		}
 	}
 
 	@Override
@@ -26,7 +70,7 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 			throw new IndexOutOfBoundsException();
 		}
 
-		if (digit > 8 || digit < 0) {
+		if (digit > 9 || digit < 0) {
 			throw new IllegalArgumentException();
 		}
 
@@ -62,19 +106,73 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 		}
 		if (col > 8 || col < 0) {
 			throw new IndexOutOfBoundsException();
-		} else
+		} 
+		
+		if(matrix[row][col] == 0) {
 			return true;
+		}
+		else {
+			boolean validRow = isRowValid(row, col);
+			boolean validCol = isColValid(row, col);
+			boolean validRegion = isRegionValid(row, col);
+			if (validRow && validCol && validRegion) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
+
+	private boolean isRowValid(int row, int col) {
+		int digit = matrix[row][col];
+		for (int c = 0; c < 9; c++) { // Använd separat variabel för kolumn.
+	        if (c != col && digit == matrix[row][c]) { // Uteslut samma cell.
+	            return false;
+	        }
+	    }
+	    return true; 	
+	}
+	
+	private boolean isColValid(int row, int col) {
+		int digit = matrix[row][col];
+		for(int r = 0; r < 9; r++) {
+			if(r != row && digit == matrix[r][col]) {
+				return false;
+			}
+		}
+		return true;	
+	}
+	
+	private boolean isRegionValid(int row, int col) {
+		int startRowInRegion = (row / 3) * 3;
+		int startColInRegion = (col / 3) * 3;
+		
+		boolean[] seen = new boolean[10];
+		
+		for(int i = 0; i < 3; i ++) {
+			for(int j = 0; j < 3; j ++) {
+				int current = matrix[startRowInRegion + i][startColInRegion + j];
+				if(current != 0) {
+					if(seen[current]) {
+						return false;
+					}
+				}seen[current] = true;
+			}
+		} return true;
+	}
+
 
 	@Override
 	public boolean isAllValid() {
-
 		for (int row = 0; row < matrix.length; row++) {
 			for (int col = 0; col < matrix.length; col++) {
-				if (get(row, col) < 1 || get(row, col) > 9) {
+				if (get(row, col) < 0 || get(row, col) > 9) {
+					return false;
+				}if(!isValid(row, col)) {
 					return false;
 				}
 			}
+			continue;
 		}
 		return true;
 	}
@@ -84,14 +182,15 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 		if (m.length != 9 || m[0].length != 9) {
 			throw new IllegalArgumentException("Grid must be 9x9");
 		}
-		
-		for(int row = 0; row < 9; row++) {
-			for( int col = 1; col < 9; col ++) {
-				if(m[row][col] < 0 || m[row][col] > 9 ) {
+
+		for (int row = 0; row < 9; row++) {
+			for (int col = 1; col < 9; col++) {
+				if (m[row][col] < 0 || m[row][col] > 9) {
 					throw new IllegalArgumentException("Value must be between 0 and 9");
 				}
 			}
-		} this.matrix = m;
+		}
+		this.matrix = m;
 	}
 
 	@Override

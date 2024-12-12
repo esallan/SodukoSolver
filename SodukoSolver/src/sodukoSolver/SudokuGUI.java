@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 public class SudokuGUI {
 
 	private JFrame sodukoWindow;
-	private JTextField[][] grid = new JTextField[9][9]; 
+	private JTextField[][] grid = new JTextField[9][9];
 
 	public void createWindow() {
 		sodukoWindow = new JFrame("SodukoSolver");
@@ -22,9 +22,9 @@ public class SudokuGUI {
 		JPanel gridPanel = createGrid();
 
 		JPanel buttonPanel = createButtons();
-		
+
 		JPanel wrapperPanel = createWrapperPanel(gridPanel);
-		
+
 		sodukoWindow.add(wrapperPanel, BorderLayout.CENTER);
 		sodukoWindow.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -34,9 +34,9 @@ public class SudokuGUI {
 
 	private JPanel createWrapperPanel(JPanel gridPanel) {
 		JPanel wrapperPanel = new JPanel(null);
-		wrapperPanel.setPreferredSize(new Dimension(450,450));
+		wrapperPanel.setPreferredSize(new Dimension(450, 450));
 		wrapperPanel.add(gridPanel);
-		gridPanel.setBounds(70,70,450,450);
+		gridPanel.setBounds(70, 70, 450, 450);
 		return wrapperPanel;
 	}
 
@@ -73,19 +73,33 @@ public class SudokuGUI {
 		InterfaceSudokuSolver solver = new SudokuSolver();
 		for (int row = 0; row < grid.length; row++) {
 			for (int col = 0; col < grid[0].length; col++) {
-				solver.set(row, col, Integer.parseInt(grid[row][col].getText())); // TODO: handle parsing errors
+				String digitString = grid[row][col].getText();
+				int digit = 0;
+				
+				// If there is one character in the text field
+				if (digitString.length() == 1) {
+					digit = Integer.parseInt(digitString);
+				}
+				
+				solver.set(row, col, digit); // TODO: handle parsing errors
 			}
 		}
 		boolean solved = solver.solve();
+		
 		if (solved) {
 			// copy the solver's grid onto the UI so the user can see the solution
+			for (int row = 0; row < grid.length; row++) {
+				for (int col = 0; col < grid[0].length; col++) {
+					grid[row][col].setText(String.valueOf(solver.get(row, col)));
+				}
+			}
 			return true;
 		} else {
 			System.out.print("This Soduko can't be solved");
 			return false;
-				// tell the user it isn't solvable
+			// tell the user it isn't solvable
 		}
-		
+
 	}
 
 	private void clearGrid() {

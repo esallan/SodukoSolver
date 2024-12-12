@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="testSodukoSolver.isAllValidSodukoRulesNotFollowed" project="SodukoSolver" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="test.testSodukoSolver" time="0.017" displayname="testSodukoSolver" uniqueid="[engine:junit-jupiter]/[class:test.testSodukoSolver]">
+    <testcase name="isAllValidSodukoRulesNotFollowed" classname="test.testSodukoSolver" time="0.017" displayname="false if all filled in digits does NOT follows the the sudoku rules" uniqueid="[engine:junit-jupiter]/[class:test.testSodukoSolver]/[method:isAllValidSodukoRulesNotFollowed()]">
+      <error>java.lang.IllegalArgumentException&#13;
+	at SodukoSolver/sodukoSolver.SudokuSolver.set(SudokuSolver.java:74)&#13;
+	at SodukoSolver/test.testSodukoSolver.isAllValidSodukoRulesNotFollowed(testSodukoSolver.java:198)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>
