@@ -109,7 +109,11 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 			boolean validRow = isRowValid(row, col);
 			boolean validCol = isColValid(row, col);
 			boolean validRegion = isRegionValid(row, col);
-			return validRow && validCol && validRegion;
+			if (validRow && validCol && validRegion) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -146,8 +150,8 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 					if (seen[current]) {
 						return false;
 					}
-					seen[current] = true;
 				}
+				seen[current] = true;
 			}
 		}
 		return true;
@@ -176,7 +180,7 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 		}
 
 		for (int row = 0; row < 9; row++) {
-			for (int col = 0; col < 9; col++) {
+			for (int col = 1; col < 9; col++) {
 				if (m[row][col] < 0 || m[row][col] > 9) {
 					throw new IllegalArgumentException("Value must be between 0 and 9");
 				}
