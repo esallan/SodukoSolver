@@ -76,7 +76,7 @@ public class SudokuGUI {
 		InterfaceSudokuSolver solver = new SudokuSolver();
 
 		try {
-			copyGridToSolver(solver);			
+			copyGridToSolver(solver);
 		} catch (InvalidInputException exception) {
 			errorMessage(grid[exception.row][exception.col]);
 			return false;
@@ -93,18 +93,16 @@ public class SudokuGUI {
 		}
 
 	}
-	
-	
-	
+
 	private void copyGridToSolver(InterfaceSudokuSolver solver) throws InvalidInputException {
 		RowColIterator iterator = new RowColIterator(grid.length, grid[0].length);
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			int[] position = iterator.next();
 			int row = position[0];
 			int col = position[1];
 			String cellText = grid[row][col].getText();
 			char digit = '0';
-			
+
 			if (cellText != null && cellText.length() == 1) { // om det i rutan inte är noll OCH längden av det är 1
 				char candidate = cellText.charAt(0);
 				if (Character.isDigit(candidate) && candidate != '0') {
@@ -115,20 +113,14 @@ public class SudokuGUI {
 			} else if (cellText.length() > 1) {
 				throw new InvalidInputException(row, col);
 			}
-			
-			solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
-			
-		}
-		for (int row = 0; row < grid.length; row++) {
-			for (int col = 0; col < grid[0].length; col++) {
-			}
 
+			solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
 		}
 	}
-	
+
 	private void copySolverToGrid(InterfaceSudokuSolver solver) {
 		RowColIterator iterator = new RowColIterator(grid.length, grid[0].length);
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			int[] position = iterator.next();
 			int row = position[0];
 			int col = position[1];
