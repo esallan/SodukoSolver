@@ -3,15 +3,24 @@ package sodukoSolver;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RowColIterator implements Iterator<int[]> {
+public class MatrixIterator implements Iterator<int[]> {
     private final int rows;
     private final int cols;
     private int currentRow = 0;
     private int currentCol = 0;
 
-    public RowColIterator(int rows, int cols) {
+    public MatrixIterator(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
+    }
+    
+    public void forEachElement() {
+    	while (hasNext()) {
+			int[] position = next();
+			int row = position[0];
+			int col = position[1];
+			
+    	}
     }
 
     @Override

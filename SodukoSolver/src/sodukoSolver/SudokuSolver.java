@@ -80,7 +80,7 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public void clearAll() {
-		RowColIterator iterator = new RowColIterator(matrix.length, matrix[0].length);
+		MatrixIterator iterator = new MatrixIterator(matrix.length, matrix[0].length);
 		while (iterator.hasNext()) {
 			int[] position = iterator.next();
 			int row = position[0];

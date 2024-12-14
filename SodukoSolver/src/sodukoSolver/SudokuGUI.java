@@ -1,10 +1,10 @@
 package sodukoSolver;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,7 +55,32 @@ public class SudokuGUI {
 				gridPanel.add(field); // Lägg till i rutnätet
 			}
 		}
+		colorGrid();
 		return gridPanel;
+	}
+
+	private void colorGrid() {
+		MatrixIterator iterator = new MatrixIterator(grid.length, grid[0].length);
+		while (iterator.hasNext()) {
+			int[] position = iterator.next();
+			int row = position[0];
+			int col = position[1];
+			int region = getRegion(row, col);
+			boolean isEvenRegion = (region % 2 == 0);
+			if (isEvenRegion) {
+				grid[row][col].setBackground(Color.pink);
+			}
+		}
+	}
+
+	private int getRegion(int row, int col) {
+		int startRowInRegion = (row / 3) * 3;
+		int startColInRegion = (col / 3) * 3;
+		int rowRegionIndex = startRowInRegion / 3;
+		int colRegionIndex = startColInRegion / 3;
+		int regionIndex = rowRegionIndex + colRegionIndex;
+		return regionIndex;
+
 	}
 
 	private JPanel createButtons() {
@@ -78,24 +103,31 @@ public class SudokuGUI {
 		try {
 			copyGridToSolver(solver);
 		} catch (InvalidInputException exception) {
-			errorMessage(grid[exception.row][exception.col]);
+			handleException(exception);
 			return false;
 		}
+		
 		boolean solved = solver.solve();
 
 		if (solved) {
-			// copy the solver's grid onto the UI so the user can see the solution
 			copySolverToGrid(solver);
 			return true;
 		} else {
-			System.out.print("This Soduko can't be solved");
+			showUnsolvableMessage();
 			return false;
 		}
 
 	}
 
+	private void handleException(InvalidInputException exception) {
+		JTextField invalidTextField = grid[exception.row][exception.col];
+		String invalidText = invalidTextField.getText();
+		showErrorMessage(invalidText);
+		invalidTextField.setText("");
+	}
+
 	private void copyGridToSolver(InterfaceSudokuSolver solver) throws InvalidInputException {
-		RowColIterator iterator = new RowColIterator(grid.length, grid[0].length);
+		MatrixIterator iterator = new MatrixIterator(grid.length, grid[0].length);
 		while (iterator.hasNext()) {
 			int[] position = iterator.next();
 			int row = position[0];
@@ -119,7 +151,7 @@ public class SudokuGUI {
 	}
 
 	private void copySolverToGrid(InterfaceSudokuSolver solver) {
-		RowColIterator iterator = new RowColIterator(grid.length, grid[0].length);
+		MatrixIterator iterator = new MatrixIterator(grid.length, grid[0].length);
 		while (iterator.hasNext()) {
 			int[] position = iterator.next();
 			int row = position[0];
@@ -128,18 +160,21 @@ public class SudokuGUI {
 		}
 	}
 
-	private void errorMessage(JTextField textField) {
-		JOptionPane.showMessageDialog(null, "Det måste vara en siffra mellan 1 och 9!", "Ogiltig inmatning",
+	private void showErrorMessage(String invalidText) {
+		JOptionPane.showMessageDialog(null,
+				"\"" + invalidText + "\"" + " är ej giltigt.\n Skriv en siffra mellan 1 och 9!", "Ogiltig inmatning",
 				JOptionPane.WARNING_MESSAGE);
+	}
 
-		textField.setText("");
-
+	private void showUnsolvableMessage() {
+		JOptionPane.showMessageDialog(null, "Detta sudoku går inte att lösa", "Ej lösbart",
+				JOptionPane.WARNING_MESSAGE);
 	}
 
 	private void clearGrid() {
 		for (int row = 0; row < 9; row++) {
 			for (int col = 0; col < 9; col++) {
-				grid[row][col].setText(""); // Rensa textfält
+				grid[row][col].setText("");
 			}
 		}
 	}
