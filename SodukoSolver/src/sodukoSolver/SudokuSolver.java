@@ -25,8 +25,6 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 		int nextRow = nextElementIndecies[0];
 		int nextCol = nextElementIndecies[1];
 
-		System.out.println(String.valueOf(row) + " " + String.valueOf(col));
-
 		boolean isPreFilled = (matrix[row][col] != 0);
 
 		if (isPreFilled) {
@@ -66,7 +64,6 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 		}
 
 		if (digit > 9 || digit < 0) {
-			System.out.print(digit);
 			throw new IllegalArgumentException();
 		}
 

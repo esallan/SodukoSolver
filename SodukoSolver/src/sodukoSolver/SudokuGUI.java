@@ -73,6 +73,26 @@ public class SudokuGUI {
 	private boolean solveSudoku() {
 		InterfaceSudokuSolver solver = new SudokuSolver();
 
+		try {
+			copyGridToSolver(solver);			
+		} catch (InvalidInputException exception) {
+			errorMessage(grid[exception.row][exception.col]);
+			return false;
+		}
+		boolean solved = solver.solve();
+
+		if (solved) {
+			// copy the solver's grid onto the UI so the user can see the solution
+			copySolverToGrid(solver);
+			return true;
+		} else {
+			System.out.print("This Soduko can't be solved");
+			return false;
+		}
+
+	}
+	
+	private void copyGridToSolver(InterfaceSudokuSolver solver) throws InvalidInputException {
 		for (int row = 0; row < grid.length; row++) {
 			for (int col = 0; col < grid[0].length; col++) {
 				String cellText = grid[row][col].getText();
@@ -83,32 +103,24 @@ public class SudokuGUI {
 					if (Character.isDigit(candidate) && candidate != '0') {
 						digit = candidate;
 					} else {
-						errorMessage(grid[row][col]); // Skicka textfältet till errorMessage
+						throw new InvalidInputException(row, col);
 					}
 				} else if (cellText.length() > 1) {
-					errorMessage(grid[row][col]);
-					return false;
+					throw new InvalidInputException(row, col);
 				}
 
 				solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
 			}
 
 		}
-		boolean solved = solver.solve();
-
-		if (solved) {
-			// copy the solver's grid onto the UI so the user can see the solution
-			for (int row = 0; row < grid.length; row++) {
-				for (int col = 0; col < grid[0].length; col++) {
-					grid[row][col].setText(String.valueOf(solver.get(row, col)));
-				}
+	}
+	
+	private void copySolverToGrid(InterfaceSudokuSolver solver) {
+		for (int row = 0; row < grid.length; row++) {
+			for (int col = 0; col < grid[0].length; col++) {
+				grid[row][col].setText(String.valueOf(solver.get(row, col)));
 			}
-			return true;
-		} else {
-			System.out.print("This Soduko can't be solved");
-			return false;
 		}
-
 	}
 
 	private void errorMessage(JTextField textField) {
