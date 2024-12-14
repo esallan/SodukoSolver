@@ -72,27 +72,27 @@ public class SudokuGUI {
 
 	private boolean solveSudoku() {
 		InterfaceSudokuSolver solver = new SudokuSolver();
-		
+
 		for (int row = 0; row < grid.length; row++) {
 			for (int col = 0; col < grid[0].length; col++) {
 				String cellText = grid[row][col].getText();
 				char digit = '0';
 
-				if (cellText != null && cellText.length() == 1) { //om det i rutan inte är noll OCH längden av det är 1 
-					char candidate = cellText.charAt(0);		
+				if (cellText != null && cellText.length() == 1) { // om det i rutan inte är noll OCH längden av det är 1
+					char candidate = cellText.charAt(0);
 					if (Character.isDigit(candidate) && candidate != '0') {
 						digit = candidate;
 					} else {
-	                    errorMessage(grid[row][col]); // Skicka textfältet till errorMessage
-	                }
-				} else if(cellText.length() > 1) {
+						errorMessage(grid[row][col]); // Skicka textfältet till errorMessage
+					}
+				} else if (cellText.length() > 1) {
 					errorMessage(grid[row][col]);
 					return false;
 				}
-					
+
 				solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
-			} 
-			
+			}
+
 		}
 		boolean solved = solver.solve();
 
@@ -101,7 +101,7 @@ public class SudokuGUI {
 			for (int row = 0; row < grid.length; row++) {
 				for (int col = 0; col < grid[0].length; col++) {
 					grid[row][col].setText(String.valueOf(solver.get(row, col)));
-				} 
+				}
 			}
 			return true;
 		} else {
