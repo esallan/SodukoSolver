@@ -25,25 +25,25 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 		int nextRow = nextElementIndecies[0];
 		int nextCol = nextElementIndecies[1];
 
-		boolean isPreFilled = matrix[row][col] != 0;
+		System.out.println(String.valueOf(row) + " " + String.valueOf(col));
+
+		boolean isPreFilled = (matrix[row][col] != 0);
 
 		if (isPreFilled) {
 			return solve(nextRow, nextCol);
 		}
 
-
 		for (int attemptedNumber = 1; attemptedNumber < 10; attemptedNumber++) {
 			matrix[row][col] = attemptedNumber;
-			
-			boolean valid = isValid(row, col);
-			boolean solvable = solve(nextRow, nextCol);
-			if (valid && solvable) {
+
+			if (isValid(row, col) && solve(nextRow, nextCol)) {
 				return true;
-				}
-			matrix[row][col] = 0; //måste återställa 
-			
+			}
+
+			matrix[row][col] = 0; // måste återställa
+
 		}
-		return false; 
+		return false;
 	}
 
 	private int[] next(int row, int col) {
@@ -110,6 +110,7 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 			boolean validCol = isColValid(row, col);
 			boolean validRegion = isRegionValid(row, col);
 			return validRow && validCol && validRegion;
+
 		}
 	}
 

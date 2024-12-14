@@ -26,7 +26,7 @@ class testSodukoSolver {
 	@DisplayName("solve given soduko, should return true")
 	void solveGivenSoduko() {
 		SudokuSolver solver = new SudokuSolver();
-		solver.set(0, 3, 8);
+		solver.set(0, 2, 8);
 		solver.set(0, 5, 9);
 		solver.set(0, 7, 6);
 		solver.set(0, 8, 2);
