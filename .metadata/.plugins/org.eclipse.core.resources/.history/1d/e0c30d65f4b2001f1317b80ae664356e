@@ -1,9 +1,0 @@
-package sodukoSolver;
-
-public class SodukoSolverMain {
-
-	public static void main(String[] args) {
-		SodukoSolver soduko = new SodukoSolver();
-	}
-
-}

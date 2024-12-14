@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="testSodukoSolver.isValidEmptyBox" project="SodukoSolver" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="test.testSodukoSolver" time="0.013" displayname="testSodukoSolver" uniqueid="[engine:junit-jupiter]/[class:test.testSodukoSolver]">
-    <testcase name="isValidEmptyBox" classname="test.testSodukoSolver" time="0.013" displayname="true if the box is empty" uniqueid="[engine:junit-jupiter]/[class:test.testSodukoSolver]/[method:isValidEmptyBox()]"/>
-  </testsuite>
-</testrun>

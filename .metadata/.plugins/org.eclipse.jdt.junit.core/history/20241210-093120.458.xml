@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="testSodukoSolver.setGridWrongDimensions" project="SodukoSolver" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="test.testSodukoSolver" time="0.009" displayname="testSodukoSolver" uniqueid="[engine:junit-jupiter]/[class:test.testSodukoSolver]">
-    <testcase name="setGridWrongDimensions" classname="test.testSodukoSolver" time="0.008" displayname="IllegalArgumentException if m has the wrong dimension" uniqueid="[engine:junit-jupiter]/[class:test.testSodukoSolver]/[method:setGridWrongDimensions()]"/>
-  </testsuite>
-</testrun>
