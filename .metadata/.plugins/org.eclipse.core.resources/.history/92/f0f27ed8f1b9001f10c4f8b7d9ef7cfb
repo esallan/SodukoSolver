@@ -85,13 +85,11 @@ public class SudokuGUI {
 					} else {
 	                    errorMessage(grid[row][col]); // Skicka textfältet till errorMessage
 	                }
-				} else if(cellText.length() > 1) {
+				} else 
 					errorMessage(grid[row][col]);
-					return false;
-				}
-					
-				solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
-			} 
+				
+				solver.set(row, col, (int)digit); // TODO: handle parsing errors
+			}
 			
 		}
 		boolean solved = solver.solve();

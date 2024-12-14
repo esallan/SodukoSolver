@@ -65,10 +65,9 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 			throw new IndexOutOfBoundsException();
 		}
 
-		if (digit > 9 || digit < 0) {
-			System.out.print(digit);
-			throw new IllegalArgumentException();
-		}
+//		if (digit > 9 || digit < 0) {
+//			throw new IllegalArgumentException();
+//		}
 
 		matrix[row][col] = digit;
 

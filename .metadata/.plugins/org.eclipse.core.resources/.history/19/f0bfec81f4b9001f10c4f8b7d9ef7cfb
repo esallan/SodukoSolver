@@ -89,7 +89,7 @@ public class SudokuGUI {
 					errorMessage(grid[row][col]);
 					return false;
 				}
-					
+				
 				solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
 			} 
 			
