@@ -4,11 +4,7 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 	private int[][] matrix = new int[9][9];
 
 	public SudokuSolver() {
-		for (int rows = 0; rows < 9; rows++) {
-			for (int coulmns = 0; coulmns < 9; coulmns++) {
-				matrix[rows][coulmns] = 0;
-			}
-		}
+		clearAll();
 	}
 
 	@Override
@@ -84,10 +80,12 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public void clearAll() {
-		for (int row = 0; row < matrix.length; row++) {
-			for (int col = 0; col < matrix.length; col++) {
-				matrix[row][col] = 0;
-			}
+		RowColIterator iterator = new RowColIterator(matrix.length, matrix[0].length);
+		while (iterator.hasNext()) {
+			int[] position = iterator.next();
+			int row = position[0];
+			int col = position[1];
+			matrix[row][col] = 0;
 		}
 
 	}
