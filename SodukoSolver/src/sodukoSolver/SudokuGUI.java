@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Iterator;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -92,34 +94,45 @@ public class SudokuGUI {
 
 	}
 	
+	
+	
 	private void copyGridToSolver(InterfaceSudokuSolver solver) throws InvalidInputException {
-		for (int row = 0; row < grid.length; row++) {
-			for (int col = 0; col < grid[0].length; col++) {
-				String cellText = grid[row][col].getText();
-				char digit = '0';
-
-				if (cellText != null && cellText.length() == 1) { // om det i rutan inte är noll OCH längden av det är 1
-					char candidate = cellText.charAt(0);
-					if (Character.isDigit(candidate) && candidate != '0') {
-						digit = candidate;
-					} else {
-						throw new InvalidInputException(row, col);
-					}
-				} else if (cellText.length() > 1) {
+		RowColIterator iterator = new RowColIterator(grid.length, grid[0].length);
+		while(iterator.hasNext()) {
+			int[] position = iterator.next();
+			int row = position[0];
+			int col = position[1];
+			String cellText = grid[row][col].getText();
+			char digit = '0';
+			
+			if (cellText != null && cellText.length() == 1) { // om det i rutan inte är noll OCH längden av det är 1
+				char candidate = cellText.charAt(0);
+				if (Character.isDigit(candidate) && candidate != '0') {
+					digit = candidate;
+				} else {
 					throw new InvalidInputException(row, col);
 				}
-
-				solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
+			} else if (cellText.length() > 1) {
+				throw new InvalidInputException(row, col);
+			}
+			
+			solver.set(row, col, Character.getNumericValue(digit)); // TODO: handle parsing errors
+			
+		}
+		for (int row = 0; row < grid.length; row++) {
+			for (int col = 0; col < grid[0].length; col++) {
 			}
 
 		}
 	}
 	
 	private void copySolverToGrid(InterfaceSudokuSolver solver) {
-		for (int row = 0; row < grid.length; row++) {
-			for (int col = 0; col < grid[0].length; col++) {
-				grid[row][col].setText(String.valueOf(solver.get(row, col)));
-			}
+		RowColIterator iterator = new RowColIterator(grid.length, grid[0].length);
+		while(iterator.hasNext()) {
+			int[] position = iterator.next();
+			int row = position[0];
+			int col = position[1];
+			grid[row][col].setText(String.valueOf(solver.get(row, col)));
 		}
 	}
 
