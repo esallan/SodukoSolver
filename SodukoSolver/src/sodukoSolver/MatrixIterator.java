@@ -13,15 +13,6 @@ public class MatrixIterator implements Iterator<int[]> {
         this.rows = rows;
         this.cols = cols;
     }
-    
-    public void forEachElement() {
-    	while (hasNext()) {
-			int[] position = next();
-			int row = position[0];
-			int col = position[1];
-			
-    	}
-    }
 
     @Override
     public boolean hasNext() {

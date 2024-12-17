@@ -9,6 +9,11 @@ public class SudokuSolver implements InterfaceSudokuSolver {
 
 	@Override
 	public boolean solve() {
+		
+		if(!isAllValid()) {
+			return false;
+		}
+		
 		return solve(0, 0);
 	}
 
